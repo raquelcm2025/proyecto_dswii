@@ -1,0 +1,32 @@
+package com.app.DL.DALC;
+
+import java.util.List;
+
+import com.app.BL.BE.DetalleVentaBE;
+
+public class DetalleVentaDALC {
+	@Override
+	public List<DetalleVentaBE> listarDetalleVentaBE() {
+		return null;
+	}
+
+	@Override
+	public int insertarDetalleVenta(DetalleVentaBE detalleVentaBE) {
+		return 0;
+	}
+
+	@Override
+	public DetalleVentaBE obtenerPorID(int DetalleVentaID) {
+		return null;
+	}
+
+	@Override
+	public boolean actualizarProducto(DetalleVentaBE productoBE) {
+		return false;
+	}
+
+	@Override
+	public boolean eliminarProducto(int productoID) {
+		return false;
+	}
+}

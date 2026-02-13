@@ -1,0 +1,62 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib  prefix="c" uri="jakarta.tags.core"%>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Helados</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Lista de Helados</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Sabor</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${helados}" var="helado">
+                <tr>
+                    <td>${helado.id}</td>
+                    <td>${helado.nombre}</td>
+                    <td>${helado.sabor}</td>
+                    <td>${helado.precio}</td>
+                    <td>${helado.stock}</td>
+                    <td>${helado.categoriaId}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+    
+    
+	<h2>Agregar Helado</h2>
+	form action="HeladoServlet" method="post">
+    <label>Nombre:</label>
+    <input type="text" name="nombre"/><br/>
+
+    <label>Sabor:</label>
+    <input type="text" name="sabor"/><br/>
+
+    <label>Precio:</label>
+    <input type="text" name="precio"/><br/>
+
+    <label>Stock:</label>
+    <input type="text" name="stock"/><br/>
+
+    <label>Categoría:</label>
+    <input type="text" name="categoriaId"/><br/>
+
+    <input type="submit" value="Guardar"/>
+	</form>
+	
+</body>
+</html>

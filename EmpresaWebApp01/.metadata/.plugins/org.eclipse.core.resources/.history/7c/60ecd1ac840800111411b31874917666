@@ -1,0 +1,28 @@
+package com.app.DL.DALC;
+
+public class DetalleVentaDALC {
+	@Override
+	public List<ProductoBE> listarProductos() {
+		return null;
+	}
+
+	@Override
+	public int insertarProducto(ProductoBE productoBE) {
+		return 0;
+	}
+
+	@Override
+	public ProductoBE obtenerPorID(int productoID) {
+		return null;
+	}
+
+	@Override
+	public boolean actualizarProducto(ProductoBE productoBE) {
+		return false;
+	}
+
+	@Override
+	public boolean eliminarProducto(int productoID) {
+		return false;
+	}
+}

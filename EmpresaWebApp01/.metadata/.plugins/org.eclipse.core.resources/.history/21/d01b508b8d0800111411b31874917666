@@ -1,0 +1,73 @@
+package com.app.Controllers;
+
+import java.io.IOException;
+import java.util.List;
+
+import com.app.BL.BE.HeladoBE;
+import com.app.Models.HeladoModel;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/HeladoServlet")
+public class HeladoServlet extends HttpServlet {
+
+    private HeladoModel heladoModel = new HeladoModel();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String accion = req.getParameter("accion");
+
+        if (accion == null)
+            accion = "listar";
+
+        switch (accion) {
+
+            case "nuevo":
+                req.getRequestDispatcher("nuevo-helado.jsp")
+                        .forward(req, resp);
+                break;
+                
+            case "actualizar":
+                int id = Integer.parseInt(req.getParameter("id"));
+                HeladoBE heladoBE = heladoModel.obtenerPorID(id);
+                req.setAttribute("helado", heladoBE);
+                req.getRequestDispatcher("nuevo-helado.jsp")
+                        .forward(req, resp);
+                break;
+
+            case "eliminar":
+                int idEliminar = Integer.parseInt(req.getParameter("id"));
+                boolean eliminado = heladoModel.eliminarHelado(idEliminar);
+                if (eliminado)
+                    resp.sendRedirect("HeladoServlet");
+                else
+                    resp.sendRedirect("HeladoServlet");
+                break;
+
+            default:
+                List<HeladoBE> helados = heladoModel.listarHelados();
+                req.setAttribute("helados", helados);
+                req.getRequestDispatcher("lista-helados.jsp")
+                        .forward(req, resp);
+        }
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    	    throws ServletException, IOException {
+    	    HeladoBE h = new HeladoBE();
+    	    h.setNombre(request.getParameter("nombre"));
+    	    h.setSabor(request.getParameter("sabor"));
+    	    h.setPrecio(Double.parseDouble(request.getParameter("precio")));
+    	    h.setStock(Integer.parseInt(request.getParameter("stock")));
+    	    h.setCategoriaId(Integer.parseInt(request.getParameter("categoriaId")));
+
+    	    heladoModel.insertarHelado(h);
+    	    response.sendRedirect("HeladoServlet"); // vuelve a listar
+    	}
+
+}

@@ -1,0 +1,45 @@
+package com.app.Controllers;
+
+import java.io.IOException;
+import java.util.List;
+
+import com.app.BL.BE.HeladoBE;
+import com.app.Models.HeladoModel;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/HeladoServlet")
+public class HeladoServlet extends HttpServlet {
+
+    private HeladoModel heladoModel = new HeladoModel();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Listar helados
+        List<HeladoBE> lista = heladoModel.listarHelados();
+        request.setAttribute("helados", lista);
+        request.getRequestDispatcher("/views/listaHelados.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Insertar helado
+        HeladoBE h = new HeladoBE();
+        h.setNombre(request.getParameter("nombre"));
+        h.setSabor(request.getParameter("sabor"));
+        h.setPrecio(Double.parseDouble(request.getParameter("precio")));
+        h.setStock(Integer.parseInt(request.getParameter("stock")));
+        h.setCategoriaId(Integer.parseInt(request.getParameter("categoriaId")));
+
+        heladoModel.insertarHelado(h);
+
+        // Redirigir al listado para ver el nuevo registro
+        response.sendRedirect("HeladoServlet");
+    }
+}

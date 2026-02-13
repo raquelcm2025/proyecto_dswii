@@ -1,0 +1,47 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Helados</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Lista de Helados</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Sabor</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recorrer la lista de helados -->
+            <% 
+                List<Helado> helados = (List<Helado>) request.getAttribute("helados");
+                if (helados != null) {
+                    for (Helado helado : helados) {
+            %>
+                <tr>
+                    <td><%= helado.getId() %></td>
+                    <td><%= helado.getNombre() %></td>
+                    <td><%= helado.getSabor() %></td>
+                    <td><%= helado.getPrecio() %></td>
+                    <td><%= helado.getStock() %></td>
+                    <td><%= helado.getCategoriaId() %></td>
+                </tr>
+            <% 
+                    }
+                }
+            %>
+        </tbody>
+    </table>
+
+</body>
+</html>

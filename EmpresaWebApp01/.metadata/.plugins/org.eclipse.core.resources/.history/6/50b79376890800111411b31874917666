@@ -1,0 +1,41 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Helados</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Lista de Helados</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Sabor</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recorrer la lista de helados -->
+            <c:forEach var="helado" items="${helados}">
+                <tr>
+                    <td>${helado.id}</td>
+                    <td>${helado.nombre}</td>
+                    <td>${helado.sabor}</td>
+                    <td>${helado.precio}</td>
+                    <td>${helado.stock}</td>
+                    <td>${helado.categoriaId}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
+</body>
+</html>
